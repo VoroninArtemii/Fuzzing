@@ -5,7 +5,7 @@ fuzz: fuzz.cc
 
 corpus1: a.out
 	./a.out -seed=3918206239 corpus1/
-	
+
 corpus2: a.out
 	./a.out -seed=3918206239 corpus2/
 
