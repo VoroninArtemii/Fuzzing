@@ -6,7 +6,7 @@ using namespace std;
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size){
 
 /*
-//	The output of mutated data
+//	The output of mutated data in console
 	for (int i = 0; i < Size; i++)
 		cout<<Data[i];
 	cout<<endl<<endl<<endl<<endl;
