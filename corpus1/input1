@@ -1,1 +1,7 @@
-\xfe\x00\x00t\x00\x00\x00o\x00\x00\x00s\x00\x00\x00t\x00\x00\x00\xad\x4d\xa1\x0a\x0b
+<transition source="idle" target="run">
+	<event name="key_up|key_shift" />
+</transition>
+<transition source="run" target="attack">
+	<event name="key_ctrl" />
+	<condition expr="weapon != null" />
+</transition>
