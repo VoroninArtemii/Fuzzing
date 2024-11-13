@@ -9,6 +9,7 @@ WORKDIR /kubernetes
 RUN git switch --detach v1.31.2
 RUN make
 
-WORKDIR /kubernetes/test/fuzz
-COPY fuzz.go ./
-RUN go test -fuzz=Fuzz
+COPY new/ test/fuzz/new/
+WORKDIR /kubernetes/test/fuzz/new/
+VOLUME /kubernetes/test/fuzz/new/
+RUN go test -fuzz=Fuzz -fuzztime=7200s -parallel=1
