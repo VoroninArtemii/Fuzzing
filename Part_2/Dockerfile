@@ -11,8 +11,10 @@ RUN echo "rpm http://ftp.altlinux.org/pub/distributions/ALTLinux c10f2/branch/x8
 RUN apt-get update -y
 RUN apt-get install golang -y
 
-WORKDIR /apimachinery
-COPY new/ pkg/test/new/
-WORKDIR /apimachinery/pkg/test/new/
-VOLUME /apimachinery/pkg/test/new/
-RUN go test -fuzz=Fuzz -fuzztime=60s -parallel=1
+COPY fuzz/fuzz_test.go /apimachinery/pkg/runtime/serializer/protobuf/fuzz_test.go
+WORKDIR /apimachinery/pkg/runtime/serializer/protobuf/
+VOLUME /apimachinery/pkg/runtime/serializer/protobuf/
+
+RUN go test -fuzz=Fuzz -test.fuzzcachedir=./corpus -fuzztime=180s -parallel=1
+RUN go test -test.fuzzcachedir=./corpus -coverprofile=cover.out
+RUN go tool cover -html=cover.out -o cover.html
