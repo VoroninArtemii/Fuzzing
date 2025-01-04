@@ -23,7 +23,7 @@ func FuzzDecode(f *testing.F) {
                                 t.Skip()
                 }
                 _, _, err := serializer.Decode(originalData, &gvk, into)
-                if err != nil && !IsNotMarshalable(err) {
+                if err != nil && IsNotMarshalable(err) {
                         t.Error(err)
                 }
         })
