@@ -6,7 +6,12 @@ import (
 )
 
 func FuzzParseImageName(f *testing.F) {
-	f.Add("url:5000/repo@sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
+	f.Add("url")
+	f.Add(":")
+	f.Add("/")
+	f.Add("@")
+	f.Add("sha256")
+	f.Add("repo")
 	f.Fuzz(func(t *testing.T, input string) {
 		_, err_1 := dockerref.ParseNormalizedNamed(input)
 		if err_1 != nil {

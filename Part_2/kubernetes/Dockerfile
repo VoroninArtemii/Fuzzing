@@ -6,13 +6,13 @@ RUN echo "rpm http://ftp.altlinux.org/pub/distributions/ALTLinux c10f2/branch/x8
 RUN apt-get update -y
 RUN apt-get install git golang -y
 RUN git config --global http.postBuffer 524288000
-RUN git clone --single-branch --branch=release-1.31 --depth=10 https://github.com/kubernetes/apimachinery.git
+RUN git clone --branch=release-1.31 --depth=10 https://github.com/kubernetes/apimachinery.git
 WORKDIR /apimachinery
 RUN git switch --detach v0.31.2
 WORKDIR /
-RUN git clone --single-branch --branch=release-1.31 --depth=10 https://github.com/kubernetes/kubernetes.git
+RUN git clone --branch=release-1.31 --depth=10 https://github.com/kubernetes/kubernetes.git
 WORKDIR /kubernetes
-RUN git switch --detach v1.31.2
+RUN git switch --detach v1.31.3
 WORKDIR /
 
 COPY parse_test.go /kubernetes/pkg/util/parsers/parse_test.go
