@@ -5,10 +5,10 @@ RUN echo "rpm http://ftp.altlinux.org/pub/distributions/ALTLinux c10f2/branch/x8
     echo "rpm http://ftp.altlinux.org/pub/distributions/ALTLinux c10f2/branch/noarch classic" >> /etc/apt/sources.list.d/altsp.list
 RUN apt-get update -y
 RUN apt-get install git golang -y
-RUN git clone --branch=v4.9 --depth=10 https://github.com/containers/podman
-WORKDIR /podman
-RUN git switch --detach v4.9.5
+RUN git config --global http.postBuffer 524288000
+RUN git clone --branch=v1.31.3 --depth=1 https://github.com/kubernetes/kubernetes.git
+WORKDIR /kubernetes
 
-COPY auth_test.go /podman/pkg/auth/auth_test.go
-VOLUME /podman/pkg/auth/
-WORKDIR /podman/pkg/auth/
+COPY parse_test.go /kubernetes/pkg/util/parsers/parse_test.go
+VOLUME /kubernetes/pkg/util/parsers/
+WORKDIR /kubernetes/pkg/util/parsers/
